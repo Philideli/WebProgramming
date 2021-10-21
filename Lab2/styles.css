@@ -1,0 +1,117 @@
+#one {
+    grid-area: one;
+    display: flex;
+    background-color: cadetblue;
+    justify-content: right;
+    align-items: center;
+	padding: 3%;
+}
+
+#two {
+    grid-area: two;
+    display: flex;
+    background-color: coral;
+	vertical-align: middle;
+	padding: 10%;
+    text-align: center;
+}
+
+#three {
+    grid-area: three;
+    display: flex;
+    background-color: rgb(106, 228, 106);
+    justify-content: right;
+    align-items: center;
+	padding: 3%;
+    text-align: center;
+}
+
+#four {
+    grid-area: four;
+    display: flex;
+    background-color: coral;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding: 10%;
+    text-align: center;
+}
+
+#five {
+    grid-area: five;
+    display: flex;
+    background-color: white;
+    justify-content: left;
+    align-items: center;
+	padding: 3%;
+    text-align: center;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+      "txt"
+	  "min"
+	  "fnt";
+    width: auto;
+    height: auto;
+}
+
+#six {
+    grid-area: six;
+    display: flex;
+    background-color: rgb(106, 228, 106);
+    justify-content: left;
+    align-items: center;
+	padding: 3%;
+    text-align: center;
+}
+
+#seven {
+    grid-area: seven;
+    display: flex;
+    background-color: cadetblue;
+    justify-content: left;
+    align-items: center;
+	padding: 3%;
+}
+
+#x {
+    background-color: white;
+    text-align: center;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 2%;
+}
+
+#y {
+    background-color: white;
+    text-align: right;
+    margin-right: 5%;
+    margin-left: 5%;
+    padding: 2%;
+}
+
+.wrapper {
+    padding-left:15%;
+    padding-right:15%;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 0.5fr;
+    grid-template-rows: 0.5fr 0.15fr 1.5fr 0.15fr 0.5fr;
+    grid-template-areas:
+      "one      one     one"
+      "two      three   four"
+      "two      five    four"
+      "six      six     four"
+      "seven    seven   seven";
+      width: 70%;
+      height: 70%;
+}
+
+img{
+    width:100%;
+    height: auto;
+    align-content: center;
+    align-self: center;
+    margin-bottom: 20%;
+    margin-left:3%;
+}
