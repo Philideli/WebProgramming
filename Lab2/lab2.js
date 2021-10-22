@@ -72,7 +72,7 @@ function hasCookies() {
 
 //Task 4
 document.getElementsByTagName('body')[0].onload = () => {
-    document.getElementById('four').textContent = localStorage.getItem("text");
+    document.getElementById('blockFour').textContent = localStorage.getItem("text");
     //document.getElementById('four').style.fontWeight = localStorage.getItem("fontWeight")
     document.getElementById("checker").checked = (localStorage.getItem("radio") === 'true');
 
@@ -97,25 +97,25 @@ document.getElementsByTagName('body')[0].onload = () => {
 
 document.getElementById("save").onclick = () => {
    if (document.getElementById("checker").checked) {
-       let string = document.getElementById('four').textContent;
+       let string = document.getElementById('blockFour').textContent;
        let textUpper = string.split(" ")
            .map(word => word.substring(0,1).toUpperCase() + word.substring(1, word.length)).join(' ');
        localStorage.setItem("text", textUpper);
        localStorage.setItem("radio", 'true');
-       document.getElementById('four').style.fontWeight = textUpper;
+       document.getElementById('blockFour').style.fontWeight = textUpper;
 	}
     else {
-       let string = document.getElementById('four').textContent;
+       let string = document.getElementById('blockFour').textContent;
        let textLower = string.split(" ")
            .map(word => word.substring(0,1).toLowerCase() + word.substring(1, word.length)).join(' ');
        localStorage.setItem("text", textLower);
        localStorage.setItem("radio", 'false');
-       document.getElementById('four').style.fontWeight = textLower;
+       document.getElementById('blockFour').style.fontWeight = textLower;
 	}
 }
 
-document.getElementById("checker").addEventListener('click', function() {
-    let string = document.getElementById('four').textContent;
+document.getElementById("checker").addEventListener('change', function() {
+    let string = document.getElementById('blockFour').textContent;
     let textUpper = string.split(" ")
         .map(word => word.substring(0,1).toUpperCase() + word.substring(1, word.length)).join(' ');
       
@@ -123,11 +123,11 @@ document.getElementById("checker").addEventListener('click', function() {
         document.getElementById("checker").checked = false;
         let textLower = string.split(" ")
             .map(word => word.substring(0,1).toLowerCase() + word.substring(1, word.length)).join(' ');
-        document.getElementById('four').textContent = textLower;
+        document.getElementById('blockFour').textContent = textLower;
     }
     else {
         document.getElementById("checker").checked = true;
-        document.getElementById('four').textContent = textUpper;
+        document.getElementById('blockFour').textContent = textUpper;
     }
     
 } );
@@ -139,7 +139,6 @@ hiddenBlock.hidden = true;
 localStorage.setItem("listItems-1","");
 localStorage.setItem("listItems-2","");
 let mass = "";
-let saved = { "1":false, "2":false}
 
 let blockx = document.getElementById("xBlock");
 blockx.onclick = () => {
@@ -156,33 +155,35 @@ function listCreator(current)
 function addListElement(current)
 {
     //создание элемента списка
-    let addedText = document.getElementById(`numListForm-${current}`).childNodes[1].value;
+    let addedText = document.getElementById(`inputSRC`).value;
     let li = document.createElement("li");
     li.setAttribute("class", `listItem-${current}`);
     let index = document.getElementsByClassName(`listItem-${current}`).length;
     li.setAttribute("index", index.toString());
     let image = document.createElement("img");
     image.src = addedText;
-    li.innerHTML = image +"<button onclick=\'deleteListElement( this,"+current+")\'>del</button>";
+    let buttonDel = document.createElement('button');
+    buttonDel.textContent = "Delete";
+    buttonDel.onclick = function() {deleteListElement( this,"+current+")};
+    li.appendChild(image);
+    li.appendChild( buttonDel);
     document.getElementById(`numList-${current}`).appendChild(li);
 
-    //добавление в localStorage
-    // let mass = localStorage.getItem(`listItems-${current}`);
+
     mass = mass.split(";$;")
     mass.push(addedText);
     mass = mass.join(";$;");
     listSaver(current);
-    // localStorage.setItem(`listItems-${current}`,mass);
 }
 function deleteListElement(me, current)
 {
     let index = me.parentElement.getAttribute("index");
     // //удаление из localStorage
-    if(saved[current.toString()]) mass = localStorage.getItem(`listItems-${current}`);
+    mass = localStorage.getItem(`listItems-${current}`);
     mass = mass.split(";$;");
     mass.splice(index, 1);
     mass = mass.join(";$;")
-    if(saved[current.toString()]) localStorage.setItem(`listItems-${current}`, mass);
+     localStorage.setItem(`listItems-${current}`, mass);
 
     //удаление из HTML
     me.parentElement.parentElement.removeChild(me.parentElement);
@@ -199,5 +200,4 @@ function listSaver(current)
 {
     localStorage.setItem(`listItems-${current}`, mass);
     document.getElementById(`numListForm-${current}`).setAttribute("class","hidden" );
-    saved[current] = true;
 }

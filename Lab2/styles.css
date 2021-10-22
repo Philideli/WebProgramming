@@ -112,6 +112,13 @@ img{
     height: auto;
     align-content: center;
     align-self: center;
-    margin-bottom: 20%;
+    margin-bottom: 10%;
     margin-left:3%;
+}
+
+li{
+   padding-bottom: 5%;
+}
+button{
+    margin-bottom: 5%;
 }
