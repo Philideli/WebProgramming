@@ -164,7 +164,7 @@ function addListElement(current)
     image.src = addedText;
     let buttonDel = document.createElement('button');
     buttonDel.textContent = "Delete";
-    buttonDel.onclick = function() {deleteListElement( this,"+current+")};
+    buttonDel.onclick = function() {deleteListElement( li,"+current+")};
     li.appendChild(image);
     li.appendChild( buttonDel);
     document.getElementById(`numList-${current}`).appendChild(li);
@@ -177,13 +177,13 @@ function addListElement(current)
 }
 function deleteListElement(me, current)
 {
-    let index = me.parentElement.getAttribute("index");
+    let index = me.getAttribute("index");
     // //удаление из localStorage
     mass = localStorage.getItem(`listItems-${current}`);
     mass = mass.split(";$;");
     mass.splice(index, 1);
     mass = mass.join(";$;")
-     localStorage.setItem(`listItems-${current}`, mass);
+    localStorage.setItem(`listItems-${current}`, mass);
 
     //удаление из HTML
     me.parentElement.parentElement.removeChild(me.parentElement);
